@@ -4,4 +4,5 @@
     url: https://download.civicrm.org/cv/cv.phar
     dest: /usr/local/bin/cv
     mode: 0755
+    force: yes
   tags: cv
