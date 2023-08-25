@@ -1,8 +1,17 @@
 ---
+# Still need to support multiple users on a server
+- name: get the ansible_env on nosudo to find the user's home dir
+  setup:
+    filter: ansible_env
+
+- name: Set path to install cv
+  set_fact:
+    cv_path: "{{ ansible_env.HOME + '/bin/cv' if 'nosudo' in group_names else '/usr/local/bin/cv' }}"
+
 - name: Download cv (CiviCRM CLI tool)
   get_url:
     url: https://download.civicrm.org/cv/cv.phar
-    dest: /usr/local/bin/cv
+    dest: "{{ cv_path }}"
     mode: 0755
     force: yes
   tags: cv
